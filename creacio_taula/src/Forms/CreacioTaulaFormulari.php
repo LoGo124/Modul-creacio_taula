@@ -25,7 +25,7 @@ class CreacioTaulaFormulari extends FormBase {
 
         $form['Numero'] = [
             '#type' => 'number',
-            '#title' => $this->t('Introdueix un Numero, per crear una taula amb files'),
+            '#title' => $this->t('Introdueix el Numero de files'),
         ];
         
 
@@ -42,7 +42,7 @@ class CreacioTaulaFormulari extends FormBase {
         $form['Taula'] = [
             '#type' => 'table',
             '#title' => 'La meva Taula',
-            '#header' => array('Nom i Cognom'),
+            '#header' => array('Linia'),
         ];
  
 
@@ -50,42 +50,55 @@ class CreacioTaulaFormulari extends FormBase {
         //Utilitzarem un bucle for amb la variable que te el 'Numero' guardat.
         //D'aquesta manera crearem les files per la taula amb el numero que vam introduïr.
         //Es creara les files per cada encapçalament que hem posat.
+        //echo generar_tabla_html($Numero_de_Files)
 
         for ($i=1; $i<=$Numero_de_Files; $i++) {
 
-            $form['Taula'][$i]['Nom i Cognom'] = [
+            $form['Taula'][$i]['per linia'] = [
                 '#type' => 'textfield',
-                '#title' => t('Nom i Cognom'),
+                '#title' => t('per linia'),
                 '#title_display' => 'invisible',
-                '#default_value' => 'Nom i Cognom'.$i,
+                '#default_value' => 'per linia'.$i,
             ];  
 
         }
- 
-       
-        //Crearem un boto de 'Crear Taula'.
+/* function generar_tabla_html($Numero_de_Files) {
+    $html = '<table>';
+    $html .= '<thead><tr>';
+    $html .= '<th>Linia</th>';
+    $html .= '</tr></thead>';
+    $html .= '<tbody>';
+    for ($i=1; $i<=$Numero_de_Files; $i++) {
+        $html .= '<tr>';
+        $html .= '<td>per linia</td>';
+        $html .= '</tr>';
+    }
+    $html .= '</tbody></table>';
+    
+    return $html;
+}
+*/
+
+        //Crearem un boto de 'Generar'.
         $form['submit'] = [
             '#type' => 'submit',
-            '#value' => $this->t('Crear Taula'),
+            '#value' => $this->t('Generar'),
         ];
- 
+        
         return $form;
     }
- 
     
-
-    //Crearem una funcio per quan li donem al boto de "Crear Taula".
+    
+    
+    //Funcio executada quan utilitzem el boto de "Generar".
     public function submitForm(array &$form, FormStateInterface $form_state) {
 
-        //Crearem una variable per obtenir els valors del formulari quan li donem al boto de "Crear Taula".
+        //Crearem una variable per obtenir els valors del formulari quan li donem al boto de "Generar".
         $values = $form_state->getValues();
 
-        //Cada vegada que li donem al boto de "Crear Taula", el formulari es reconstrueix en base al numero que nosaltres
+        //Cada vegada que li donem al boto de "Generar", el formulari es reconstrueix en base al numero que nosaltres
         //posem per les files de la creacio taula
         $form_state->setRebuild();
-
-        //Una vegada enviat el formulari ens sortira un missatge de que s'ha creat correctament.
-        $this->messenger()->addMessage('La Taula ha sigut creada correctament');
     }
  
 }

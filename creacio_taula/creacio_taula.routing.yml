@@ -1,15 +1,21 @@
 #En aquest fitxer tenim les rutes especificades del nostre modul com per exemple: el path del modul
 #, la ruta del formulari .php per poder fer aquest exercici, permisos i un titol del formulari. 
 
-creacio_taula.Creacio_Taula_Formulari:
-  path: '/Creacio_Taula'
+Gen_Table.Gen_Table_Form:
+  path: '/Form_Table'
   defaults:
-    _form: '\Drupal\creacio_taula\Formulari\CreacioTaulaFormulari'
-    _title: 'Introdueix un numero de files'
+    _form: '\Drupal\Gen_Table\Forms\GenTableForm'
+    _title: 'Cuantes files vols?'
   requirements:
     _permission: 'acces content'
 
-
+hello_user.hello_user:
+  path: '/Taula{name}'
+  defaults:
+    _controller: \Drupal\Gen_Table\Controller\GenTableController::GenTable
+  requirements:
+    _access: 'TRUE'
+    user: \d+
 
 
     
