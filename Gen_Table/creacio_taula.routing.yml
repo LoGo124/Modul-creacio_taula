@@ -9,13 +9,10 @@ Gen_Table.Gen_Table_Form:
   requirements:
     _permission: 'acces content'
 
-hello_user.hello_user:
+Gen_Table.hello_user:
   path: '/Taula{name}'
   defaults:
     _controller: \Drupal\Gen_Table\Controller\GenTableController::GenTable
   requirements:
     _access: 'TRUE'
     user: \d+
-
-
-    
